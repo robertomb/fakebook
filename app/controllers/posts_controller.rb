@@ -28,7 +28,7 @@ before_filter :authenticate_user!
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-
+    @post.user = current_user #depois de relacionar
       if @post.save
       redirect_to posts_path
       else
