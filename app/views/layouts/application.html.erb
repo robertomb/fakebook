@@ -8,36 +8,37 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-
+    <% if current_user %>  
+  <body class="area-privada">
+    <% else %>
   <body class="area-publica">
+    <% end %>
     <header id="header" role="banner">
       <div id="header-inner">
         <div id="logo">
           <a href="/">Fakebook</a>
         </div>
         
-        <!-- 
-        logado
-        #####
-        
+    <% if current_user %>    
         <nav class="nav-user" role="navigation">
           <ul>
             <li class="item-avatar">
               <div class="user-avatar small">
                 <div class="user-avatar-inner">
-                  <img width="24" height="24" src="/assets/user-chuck.jpg">
+                  <%= image_tag(current_user.avatar.thumb, width: 50) %>
                 </div>
               </div>
             </li>
             <li class="item-username">
-              <a href="#" title="Minha Conta"><b>Chuck Norris</b></a>
+              <a href="#" title="Minha Conta"><b><%= current_user.name %></b></a>
             </li>
             <li class="item-logout">
-              <a href="#">Sair</a>
+              <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+          
             </li>
           </ul>
         </nav>
-         -->
+     <% else %>
          
          <div id="user-login">
            <form>
@@ -58,7 +59,7 @@
 
            </form>
          </div>
-         
+         <% end %>
       </div>
     </header>
 

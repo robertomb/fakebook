@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+before_filter :authenticate_user!
+
   # GET /posts
   def index
     @posts = Post.all
@@ -8,8 +10,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
 
-    @comments = @post.comments
-    @comment = Comment.new
+    @comments = @post.comments #Funciona pq tem no model
+    @comment = Comment.new #form precisa do Model vazio
   end
 
   # GET /posts/new
